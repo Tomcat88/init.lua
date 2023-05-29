@@ -3,9 +3,9 @@ local lsp = require('lsp-zero').preset({})
 lsp.preset('recommended')
 lsp.ensure_installed({
     'tsserver',
-    'eslint',
     'lua_ls',
-    'html'
+    'html',
+    'zls'
 })
 
 -- Fix Undefined global 'vim'
@@ -31,7 +31,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "]d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
     vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
     vim.keymap.set("n", "<leader>vrn", ":lua vim.lsp.buf.rename()<CR>", opts)
-    vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.formatting()<CR>", opts)
+    vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", opts)
     vim.keymap.set("i", "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     vim.keymap.set("n", "<leader>so", ":SymbolsOutline<CR>", opts)
     vim.keymap.set("n", "<leader>sc", ":SymbolsOutlineClose<CR>", opts)

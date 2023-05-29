@@ -1,4 +1,4 @@
-require'nvim-tree'.setup {
+--[[ require'nvim-tree'.setup {
     view = {
         adaptive_size = true,
         side = "left",
@@ -7,4 +7,4 @@ require'nvim-tree'.setup {
     filters = { custom = { "^.git$" } }
 }
 
-vim.keymap.set("", "<F2>", ":NvimTreeFindFileToggle<CR>")
+vim.keymap.set("", "<F2>", ":NvimTreeFindFileToggle<CR>") ]]

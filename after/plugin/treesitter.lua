@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = {"java", "kotlin", "vim", "vimdoc", "query", "lua", "javascript", "typescript", "python", "html"},
+    ensure_installed = {"java", "kotlin", "vim", "vimdoc", "query", "lua", "javascript", "typescript", "python", "html", "clojure"},
 
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,

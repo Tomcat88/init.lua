@@ -59,11 +59,30 @@ return require('packer').startup(function(use)
         config = function()
             require("zen-mode").setup {
                 window = {
-                    width = 90,
-                    options = {}
+                    width = 120,
+                    options = {
+                        gitsigns = { enabled = true },
+                        tmux = { enabled = false },    -- disables the tmux statusline
+                        -- this will change the font size on alacritty when in zen mode
+                        -- requires  Alacritty Version 0.10.0 or higher
+                        -- uses `alacritty msg` subcommand to change font size
+                        alacritty = {
+                            enabled = false,
+                            font = "15", -- font size
+                        },
+                    }
                 },
             }
         end
+    }
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        }
     }
     use 'folke/which-key.nvim'
     use 'folke/trouble.nvim'
@@ -72,10 +91,11 @@ return require('packer').startup(function(use)
     use 'wakatime/vim-wakatime'
     use 'kyazdani42/nvim-web-devicons'
     use 'ryanoasis/vim-devicons'
-    use 'kyazdani42/nvim-tree.lua'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/eslint.nvim'
     use 'tpope/vim-surround'
     use 'lewis6991/gitsigns.nvim'
     use 'itchyny/lightline.vim'
+    use 'ziglang/zig.vim'
+    use 'Olical/conjure'
 end)
