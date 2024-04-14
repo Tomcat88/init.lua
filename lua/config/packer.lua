@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        branch = 'v3.x',
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
@@ -35,14 +35,10 @@ return require('packer').startup(function(use)
         }
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim', branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    -- Themese
-    use({ 'rose-pine/neovim', as = 'rose-pine' })
     use 'folke/tokyonight.nvim'
-
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -62,7 +58,7 @@ return require('packer').startup(function(use)
                     width = 120,
                     options = {
                         gitsigns = { enabled = true },
-                        tmux = { enabled = false },    -- disables the tmux statusline
+                        tmux = { enabled = false }, -- disables the tmux statusline
                         -- this will change the font size on alacritty when in zen mode
                         -- requires  Alacritty Version 0.10.0 or higher
                         -- uses `alacritty msg` subcommand to change font size
@@ -77,7 +73,7 @@ return require('packer').startup(function(use)
     }
     use {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        branch = "v3.x",
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -95,7 +91,45 @@ return require('packer').startup(function(use)
     use 'MunifTanjim/eslint.nvim'
     use 'tpope/vim-surround'
     use 'lewis6991/gitsigns.nvim'
-    use 'itchyny/lightline.vim'
     use 'ziglang/zig.vim'
     use 'Olical/conjure'
+    use "julienvincent/nvim-paredit"
+    use {
+        "guns/vim-sexp",
+        requires = {
+            "tpope/vim-sexp-mappings-for-regular-people"
+        }
+    }
+    use 'ray-x/go.nvim'
+    use 'ray-x/guihua.lua' -- recommended if need floating window support
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+    use "lukas-reineke/indent-blankline.nvim"
+    use 'stevearc/dressing.nvim'
+    use {
+        "Exafunction/codeium.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require("codeium").setup({
+            })
+        end
+    }
+    use {
+        "xiyaowong/transparent.nvim",
+        config = function()
+            require("transparent").setup({
+                extra_groups = {
+                    "TroubleNormal",
+                    "NeoTreeNormal",
+                    "NeoTreeNormalNC",
+                    "NormalFloat",
+                },
+            })
+        end
+    }
 end)

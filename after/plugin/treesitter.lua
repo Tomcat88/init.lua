@@ -1,6 +1,6 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = {"java", "kotlin", "vim", "vimdoc", "query", "lua", "javascript", "typescript", "python", "html", "clojure"},
+    ensure_installed = { "templ", "java", "kotlin", "vim", "vimdoc", "query", "lua", "javascript", "typescript", "python", "clojure", "go" },
 
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -55,7 +55,7 @@ require'nvim-treesitter.configs'.setup {
             -- mapping query_strings to modes.
             selection_modes = {
                 ['@parameter.outer'] = 'v', -- charwise
-                ['@function.outer'] = 'V', -- linewise
+                ['@function.outer'] = 'V',  -- linewise
                 ['@class.outer'] = '<c-v>', -- blockwise
             },
             -- If you set this to `true` (default is `false`) then any textobject is
@@ -101,3 +101,4 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
+vim.filetype.add({ extension = { templ = "templ" } })

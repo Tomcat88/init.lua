@@ -1,15 +1,29 @@
 local lsp = require('lsp-zero').preset({})
+local lspconfig = require('lspconfig')
 
 lsp.preset('recommended')
-lsp.ensure_installed({
-    'tsserver',
-    'lua_ls',
-    'html',
-    'zls'
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    -- Replace the language servers listed here
+    -- with the ones you want to install
+    ensure_installed = {
+        'tsserver',
+        'lua_ls',
+        'zls',
+        'clojure_lsp',
+        'gopls',
+        'terraformls',
+        'lua_ls',
+        'templ'
+    },
+    handlers = {
+        lsp.default_setup,
+    }
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             diagnostics = {
@@ -17,9 +31,18 @@ lsp.configure('lua_ls', {
             }
         }
     }
-})
+}
 
-lsp.on_attach(function(client, bufnr)
+lspconfig.htmx.setup {
+    filetypes = { "html", "templ" },
+}
+
+lspconfig.tailwindcss.setup {
+    filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    init_options = { userLanguages = { templ = "html" } },
+}
+
+lsp.on_attach(function(_, bufnr)
     local opts = { remap = false, buffer = bufnr }
     -- lsp.default_keymaps({buffer = bufnr})
     vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
@@ -36,6 +59,8 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>so", ":SymbolsOutline<CR>", opts)
     vim.keymap.set("n", "<leader>sc", ":SymbolsOutlineClose<CR>", opts)
 end)
+
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = vim.lsp.buf.format })
 
 
 lsp.setup()
@@ -65,35 +90,35 @@ vim.g.symbols_outline = {
 }
 
 local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
-local lspkind = require('lspkind')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-        ["<C-p>"] = cmp_action.luasnip_jump_backward(),
-        ["<C-n>"] = cmp_action.luasnip_jump_forward(),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<TAB>'] = cmp.mapping.confirm({ select = true })
-    }),
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip", keyword_length = 2 },
+    sources = {
         { name = "path" },
-        { name = "buffer",  keyword_length = 3 }
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "luasnip", keyword_length = 2 },
+        { name = "buffer",  keyword_length = 3 },
+        { name = "codeium" }
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        -- ['<TAB>'] = cmp.mapping.confirm({ select = true })
     }),
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered()
     },
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol_text', -- show only symbol annotations
-            maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-        })
-    }
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    formatting = lsp.cmp_format({ details = false })
 })
 
 

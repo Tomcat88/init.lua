@@ -29,7 +29,9 @@ require("neo-tree").setup({
         },
     },
     buffers = {
-        follow_current_file = true,   -- This will find and focus the file in the active buffer every
+        follow_current_file = {
+            enabled = true,
+        },   -- This will find and focus the file in the active buffer every
         -- time the current file is changed while the tree is open.
         group_empty_dirs = true,      -- when true, empty folders will be grouped together
         show_unloaded = true,
@@ -43,4 +45,6 @@ require("neo-tree").setup({
     },
 })
 
-vim.cmd([[nnoremap \ :NeoTreeRevealToggle<cr>]])
+vim.cmd([[nnoremap \ :Neotree toggle<cr>]])
+vim.cmd([[nnoremap <leader>bs :Neotree toggle show buffers right<cr>]])
+vim.cmd([[nnoremap <leader>gs :Neotree float git_status<cr>]])
