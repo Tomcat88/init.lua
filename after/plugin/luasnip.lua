@@ -48,5 +48,21 @@ ls.add_snippets("typescriptreact", {
     }}
     ]],
         { i(1), i(2), rep(1), rep(1), i(3), c(4, { i(), t "div" }), i(5, "Hello"), rep(4) }
-    ))
+    )),
+    s("ust",
+        fmt("const [{}, set{}] = React.useState{}({});",
+            {
+                i(1),
+                f(
+                    function(args)
+                        local state = args[1][1]
+                        return state:sub(1, 1):upper() .. state:sub(2)
+                    end,
+                    { 1 }
+                ),
+                c(2, { t "", sn(nil, { t "<", i(1), t ">" }) }),
+                c(3, { t "", t "\"\"", t "true", t "false", t "null", i() })
+            }
+        )
+    )
 })

@@ -15,7 +15,7 @@ require('mason-lspconfig').setup({
         'gopls',
         'terraformls',
         'lua_ls',
-        'templ'
+        'templ',
     },
     handlers = {
         lsp.default_setup,
@@ -99,7 +99,8 @@ cmp.setup({
         { name = "nvim_lua" },
         { name = "luasnip", keyword_length = 2 },
         { name = "buffer",  keyword_length = 3 },
-        { name = "codeium" }
+        { name = "codeium" },
+        { name = "gitmoji" }
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),

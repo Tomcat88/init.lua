@@ -49,6 +49,11 @@ return require('packer').startup(function(use)
         } }
     }
     use 'tpope/vim-fugitive'
+    use 'lewis6991/gitsigns.nvim'
+    use {
+        'Dynge/gitmoji.nvim',
+        requires = { { 'hrsh7th/nvim-cmp' } }
+    }
     use 'mbbill/undotree'
     use {
         "folke/zen-mode.nvim",
@@ -90,7 +95,6 @@ return require('packer').startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/eslint.nvim'
     use 'tpope/vim-surround'
-    use 'lewis6991/gitsigns.nvim'
     use 'ziglang/zig.vim'
     use 'Olical/conjure'
     use "julienvincent/nvim-paredit"
@@ -119,17 +123,5 @@ return require('packer').startup(function(use)
             })
         end
     }
-    use {
-        "xiyaowong/transparent.nvim",
-        config = function()
-            require("transparent").setup({
-                extra_groups = {
-                    "TroubleNormal",
-                    "NeoTreeNormal",
-                    "NeoTreeNormalNC",
-                    "NormalFloat",
-                },
-            })
-        end
-    }
+    use "xiyaowong/transparent.nvim"
 end)
