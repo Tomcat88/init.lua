@@ -1,9 +1,14 @@
 local lsp = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
+local win = require('lspconfig.ui.windows')
 
 lsp.preset('recommended')
 
-require('mason').setup({})
+require('mason').setup({
+    ui = {
+        border = "double"
+    }
+})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
@@ -22,6 +27,7 @@ require('mason-lspconfig').setup({
     }
 })
 
+win.default_options.border = 'double'
 -- Fix Undefined global 'vim'
 lspconfig.lua_ls.setup {
     settings = {
@@ -40,6 +46,28 @@ lspconfig.htmx.setup {
 lspconfig.tailwindcss.setup {
     filetypes = { "templ", "astro", "javascript", "typescript", "react" },
     init_options = { userLanguages = { templ = "html" } },
+}
+
+lspconfig.tsserver.setup {
+    settings = {
+        tsserver = {
+        }
+    }
+}
+
+lspconfig.gopls.setup {
+    settings = {
+        gopls = {
+            ["ui.inlayhint.hints"] = {
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                parameterNames = true,
+                functionTypeParameters = true,
+                rangeVariableTypes = true,
+            },
+        }
+    }
 }
 
 lsp.on_attach(function(_, bufnr)

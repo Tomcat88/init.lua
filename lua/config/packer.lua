@@ -90,7 +90,7 @@ return require('packer').startup(function(use)
     use 'kylechui/nvim-surround'
     use 'b3nj5m1n/kommentary'
     use 'wakatime/vim-wakatime'
-    use 'kyazdani42/nvim-web-devicons'
+    use 'nvim-tree/nvim-web-devicons'
     use 'ryanoasis/vim-devicons'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/eslint.nvim'

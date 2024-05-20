@@ -1,5 +1,5 @@
-vim.opt.list = false
-vim.opt.listchars:append "space:⋅"
+-- vim.opt.list = false
+-- vim.opt.listchars:append "space:⋅"
 
 require("ibl").setup {
     debounce = 500,

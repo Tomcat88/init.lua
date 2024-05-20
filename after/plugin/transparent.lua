@@ -13,6 +13,15 @@ require("transparent").setup({
         "LspInfoBorder",
         "LspFloatWinNormal",
         "LspFloatWinBorder",
-        "FloatBorder"
+        "FloatBorder",
+        "FloatTitle",
+        "lualine_c_normal",
+        "lualine_x_filetype_DevIconLua_normal",
+        "lualine_x_filetype_DevIconLua_visual",
+        "lualine_x_filetype_DevIconLua_insert",
+        "lualine_x_filetype_DevIconLua_command",
+        "lualine_x_filetype_DevIconLua_inactive",
+        "lualine_x_filetype_DevIconLua_replace",
+        "LspInlayHint"
     },
 })
