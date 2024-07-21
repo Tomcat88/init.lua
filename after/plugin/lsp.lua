@@ -14,12 +14,15 @@ require('mason-lspconfig').setup({
     -- with the ones you want to install
     ensure_installed = {
         'tsserver',
+        -- 'typescript-language-server',
+        'tailwind-language-server',
+        'shellcheck',
+        'shfmt',
         'lua_ls',
         'zls',
         'clojure_lsp',
         'gopls',
         'terraformls',
-        'lua_ls',
         'templ',
     },
     handlers = {
@@ -48,14 +51,32 @@ lspconfig.tailwindcss.setup {
     init_options = { userLanguages = { templ = "html" } },
 }
 
-lspconfig.tsserver.setup {
-    settings = {
-        tsserver = {
-        }
+lspconfig.opts = {
+    inlay_hints = {
+        enabled = true
     }
 }
 
-lspconfig.gopls.setup {
+--[[ lspconfig.tsserver.setup {
+    settings = {
+        tsserver = {
+            init_options = {
+                preferences = {
+                    includeInlayParameterNameHints = 'all',
+                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                    importModuleSpecifierPreference = 'non-relative',
+                },
+            },
+        }
+    }
+} ]]
+
+--[[ lspconfig.gopls.setup {
     settings = {
         gopls = {
             ["ui.inlayhint.hints"] = {
@@ -68,7 +89,7 @@ lspconfig.gopls.setup {
             },
         }
     }
-}
+} ]]
 
 lsp.on_attach(function(_, bufnr)
     local opts = { remap = false, buffer = bufnr }
@@ -125,9 +146,10 @@ cmp.setup({
         { name = "path" },
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
-        { name = "luasnip", keyword_length = 2 },
-        { name = "buffer",  keyword_length = 3 },
+        { name = "luasnip",   keyword_length = 2 },
+        { name = "buffer",    keyword_length = 3 },
         { name = "codeium" },
+        { name = "supermaven" },
         { name = "gitmoji" }
     },
     mapping = cmp.mapping.preset.insert({

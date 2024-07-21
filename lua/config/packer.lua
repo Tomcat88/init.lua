@@ -112,6 +112,16 @@ return require('packer').startup(function(use)
     }
     use "lukas-reineke/indent-blankline.nvim"
     use 'stevearc/dressing.nvim'
+
+    use {
+        "supermaven-inc/supermaven-nvim",
+        config = function()
+            require("supermaven-nvim").setup({
+                disable_inline_completion = true,
+                disable_keymaps = true
+            })
+        end,
+    }
     use {
         "Exafunction/codeium.nvim",
         requires = {
@@ -124,4 +134,8 @@ return require('packer').startup(function(use)
         end
     }
     use "xiyaowong/transparent.nvim"
+    use {
+        "pmizio/typescript-tools.nvim",
+        requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    }
 end)
